@@ -58,7 +58,7 @@ def prep(file):
 
 @st.cache_resource
 def get_ws():
-    gc = gspread.service_account_from_dict(dict(st.secrets["gcp_service_account"]))
+    gc = gspread.service_account_from_dict(json.loads(st.secrets["GCP_JSON"]))
     ws = gc.open_by_key(st.secrets["SHEET_ID"]).sheet1
     if not ws.get_all_values():
         ws.append_row(HEADERS)
